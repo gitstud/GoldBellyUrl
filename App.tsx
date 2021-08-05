@@ -1,95 +1,78 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
 import React from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
   useColorScheme,
+  Image,
   View,
 } from 'react-native';
+import {QueryClient, QueryClientProvider} from 'react-query';
+import {NeuView} from 'react-native-neu-element';
+import {LinksList} from './components/LinksList';
+import {BrandedText} from './components/BrandedText';
+import {CreateLink} from './components/CreateLink';
+import {NeuButton} from 'react-native-neu-element';
+import {BlurView} from '@react-native-community/blur';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-const Section: React.FC<{
-  title: string;
-}> = ({children, title}) => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
+// Create a client
+const queryClient = new QueryClient();
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
+  const [formIsOpen, setFormIsOpen] = React.useState(false);
+  const handleSetFormIsOpen = () => setFormIsOpen(state => !state);
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+    <QueryClientProvider client={queryClient}>
+      <SafeAreaView style={styles.backgroundStyle}>
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        <View style={{paddingBottom: 30, paddingTop: 15}}>
+          <NeuView
+            color="#eef2f9"
+            height={150}
+            width={150}
+            borderRadius={75}
+            convex>
+            <Image
+              source={require('./assets/logo.png')}
+              style={{height: 140, width: 140, borderRadius: 70}}
+              resizeMode="contain"
+              capInsets={{left: 15, right: 15, bottom: 15, top: 15}}
+            />
+          </NeuView>
         </View>
-      </ScrollView>
-    </SafeAreaView>
+        <LinksList />
+        {formIsOpen ? (
+          <BlurView
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              bottom: 0,
+              right: 0,
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            blurType="light"
+            blurAmount={10}
+            reducedTransparencyFallbackColor="white">
+            <CreateLink cancel={handleSetFormIsOpen} />
+          </BlurView>
+        ) : (
+          <View style={styles.createButton}>
+            <NeuButton
+              width={50}
+              height={50}
+              color="#eef2f9"
+              borderRadius={16}
+              onPress={handleSetFormIsOpen}>
+              <BrandedText text="+" style={styles.createButtonText} />
+            </NeuButton>
+          </View>
+        )}
+      </SafeAreaView>
+    </QueryClientProvider>
   );
 };
 
@@ -109,6 +92,26 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
+  },
+  backgroundStyle: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    backgroundColor: '#eef2f9',
+  },
+  title: {
+    fontSize: 30,
+    paddingVertical: 30,
+  },
+  createButton: {
+    position: 'absolute',
+    right: 25,
+    bottom: 55,
+  },
+  createButtonText: {
+    fontSize: 24,
+    color: '#FE53BB',
   },
 });
 
