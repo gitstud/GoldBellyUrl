@@ -7,10 +7,11 @@ GoldBelly Take Home Project
 1. Clone Project
 2. `cd GoldBellyUrl`
 3. `yarn`
-4. `npx pod install`
+4. `cd ios && npx pod install`
 5. open `GoldBellyUrl/ios/project.xworkspace` in XCode
-6. build app
-7. Add API key to `GoldBellyURL/hooks/links.ts` line 9
+6. from project root run `yarn start`
+7. build app in XCode (play button)
+8. Add API key to `GoldBellyURL/hooks/links.ts` line 9
 
 ## Using The App
 
