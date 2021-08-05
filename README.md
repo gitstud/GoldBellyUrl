@@ -28,7 +28,7 @@ GoldBelly Take Home Project
 run `yarn test` in the project to execute the test suite
 I've written tests for the api calls / react-query hooks
 
-Ideas for more features
+## Ideas for more features
 
 1. UI feedback for API errors
 2. Component tests or snapshots
