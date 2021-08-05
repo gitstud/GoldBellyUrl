@@ -6,7 +6,7 @@ import {QueryKeys} from './QueryKeys';
 const API = axios.create({
   baseURL: 'https://api.bely.me/',
   timeout: 3000,
-  headers: {'GB-Access-Token': 'd7638fa0f955bc9ad5b9c1768ac2e7e4'},
+  headers: {'GB-Access-Token': 'your-api-key-here'},
 });
 
 export interface GBUrl {

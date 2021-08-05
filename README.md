@@ -10,6 +10,7 @@ GoldBelly Take Home Project
 4. `npx pod install`
 5. open `GoldBellyUrl/ios/project.xworkspace` in XCode
 6. build app
+7. Add API key to `GoldBellyURL/hooks/links.ts` line 9
 
 ## Using The App
 
@@ -31,3 +32,5 @@ Ideas for more features
 
 1. UI feedback for API errors
 2. Component tests or snapshots
+3. Re-organize code move Colors, Configuration objects, etc to their own files.
+4. ENV file for secrets
